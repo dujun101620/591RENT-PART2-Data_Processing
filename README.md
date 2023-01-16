@@ -367,3 +367,6 @@ INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/591RENT.csv'
 FIELDS TERMINATED BY ';'
 LINES TERMINATED BY '\r\n';
 ```
+
+## 完成xlsx檔如下圖
+
