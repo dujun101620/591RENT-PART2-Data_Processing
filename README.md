@@ -12,7 +12,7 @@
 ## 作法架構  
 1. [資料取得與儲存：Python](https://github.com/dujun101620/591RENT-PART1-Web_Crawler)
 2. **資料清理與處理：MYSQL (本篇內容)**
-3. 視覺化圖表分析：Power BI
+3. [視覺化圖表分析：Power BI](https://github.com/dujun101620/591RENT-PART3-Data_Visualization)
     
 ## 程式內容──資料清理與處理：MYSQL
 前篇已使用Pyhton將爬取到的資料共21,937筆匯入MYSQL「591rent」資料庫中的「591rent_taipei」表格(台北)與「591rent_newtaipei」表格(新北)，接下來使用MYSQL進行資料處理，以產出可分析的欄位並清理異常資料。
@@ -29,7 +29,7 @@ DESCRIBE TABLE `591rent_newtaipei`;
 SELECT COUNT(*) FROM `591rent_newtaipei`;
 SELECT * FROM `591rent_newtaipei` LIMIT 10;
 ```
-    
+### 　　     
 ### 二、備份原檔
 將Python導入的資料備份，避免表格修改錯誤，此步驟可省略。
 
@@ -43,7 +43,7 @@ INSERT INTO `591rent_newtaipei_1220` SELECT * FROM `591rent_newtaipei`;
 DESCRIBE TABLE `591rent_newtaipei_1220`;
 SELECT COUNT(*) FROM `591rent_newtaipei_1220`;
 ```
-    
+### 　　     
 ### 三、將台北與新北資料合併
 將台北市表格與新北市表格合併為591rent_all單一表格處理。
 
@@ -55,7 +55,7 @@ DESCRIBE TABLE `591rent_all`;
 SELECT COUNT(*) FROM `591rent_all`;
 SELECT * FROM `591rent_all` LIMIT 10;
 ```
-    
+### 　　     
 ### 四、資料清理
 #### 1. 排除ID重複資料
 
@@ -147,7 +147,7 @@ SELECT * FROM `591rent_all` WHERE `標題` LIKE '%倉庫%';
 DELETE FROM `591rent_all` WHERE `標題` LIKE '%倉庫%';
 SELECT COUNT(*) FROM `591rent_all`;
 ```
-    
+### 　　     
 ### 五、資料處理-新增分析用欄位
 #### 1. 押金(區間)
 由於原始資料的押金有的是租金月數，有的是金額絕對值，為方便後續分析，將資料轉換成租金月數，並設定為區間。
@@ -237,7 +237,7 @@ UPDATE `591rent_all` SET `性別限制` = REPLACE(`性別限制`,'此房屋','')
 UPDATE `591rent_all` SET `性別限制` = '無說明' WHERE `性別限制`='';
 SELECT `性別限制` FROM `591rent_all` GROUP BY `性別限制`;
 ```
-    
+### 　　     
 ### 六、篩選提供租金補助的樣本:租補(含社宅)
 #### 1. 先移除「帶看屋、享租屋補助」字樣，此為簽名檔非關鍵字
 
@@ -294,7 +294,7 @@ IF(
 SELECT COUNT(*) FROM `591rent_all` WHERE `租補(含社宅)`='Y';
 SELECT `租補(含社宅)` FROM `591rent_all` GROUP BY `租補(含社宅)`;
 ```
-    
+### 　　     
 ### 七、篩選租補中為社會住宅的樣本:租補(為社宅)
 #### 1. 判斷標準：標題或屋主說當中包含關鍵字「社會住宅」、「社宅」。
 
@@ -327,7 +327,7 @@ IF(
 SELECT COUNT(*) FROM `591rent_all` WHERE `租補(為社宅)`='Y';
 SELECT `租補(含社宅)`,`租補(為社宅)` FROM `591rent_all` GROUP BY `租補(含社宅)`,`租補(為社宅)`;
 ```
-    
+### 　　     
 ### 八、篩選租補中非社會住宅的樣本:租補(非社宅)
 
 ```sql
@@ -343,7 +343,7 @@ SELECT COUNT(*) FROM `591rent_all` WHERE `租補(非社宅)`='Y';
 SELECT `租補(含社宅)`,`租補(為社宅)`,`租補(非社宅)` FROM `591rent_all` GROUP BY `租補(含社宅)`,`租補(為社宅)`,`租補(非社宅)`;
 SELECT * FROM `591rent_all` LIMIT 10;
 ```
-    
+### 　　     
 ### 九、匯出csv檔
 先將「屋主說」欄位中的;和\r\n取代，避免資料分割錯誤，再用;作為分隔符號、/r/n作為換行符號，匯出成csv檔後以記事本開啟並複製貼到xlsx，進行資料剖析分割即完成。
 
@@ -367,14 +367,15 @@ INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/591RENT.csv'
 FIELDS TERMINATED BY ';'
 LINES TERMINATED BY '\r\n';
 ```
-    
+### 　　     
 ## 完成xlsx檔如下圖
 ![匯出EXCEL示意圖-1](https://github.com/dujun101620/591RENT-PART2-Data_Processing/blob/main/%E5%8C%AF%E5%87%BAEXCEL-1.png?raw=true)
     
 ![匯出EXCEL示意圖-2](https://github.com/dujun101620/591RENT-PART2-Data_Processing/blob/main/%E5%8C%AF%E5%87%BAEXCEL-2.png?raw=true)
 
-    
+### 　　     
 ## 資料數統計如下圖
 ![資料數統計](https://github.com/dujun101620/591RENT-PART2-Data_Processing/blob/main/%E8%B3%87%E6%96%99%E7%B5%B1%E8%A8%88.png?raw=true)
     
-
+### 　　 
+### 看下篇→[視覺化圖表分析：Power BI](https://github.com/dujun101620/591RENT-PART3-Data_Visualization)
