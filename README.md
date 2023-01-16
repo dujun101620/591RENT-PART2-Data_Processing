@@ -375,6 +375,6 @@ LINES TERMINATED BY '\r\n';
 
     
 ## 資料數統計如下圖
-![資料數統計](https://github.com/dujun101620/591RENT-PART2-Data_Processing/blob/main/%E8%B3%87%E6%96%99%E6%95%B8%E7%B5%B1%E8%A8%88(%E5%B0%8F).png?raw=true)
+![資料數統計](https://github.com/dujun101620/591RENT-PART2-Data_Processing/blob/main/%E8%B3%87%E6%96%99%E7%B5%B1%E8%A8%88.png?raw=true)
     
 
